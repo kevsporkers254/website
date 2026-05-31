@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kevs Porkers Ltd | Premium Pork Cuts in Ridgeways Kiambu Road</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fef2f2',
+                            100: '#fee2e2',
+                            200: '#fecaca',
+                            300: '#fca5a5',
+                            400: '#f87171',
+                            500: '#ef4444',
+                            600: '#dc2626',
+                            700: '#b91c1c',
+                            800: '#991b1b',
+                            900: '#7f1d1d',
+                            950: '#450a0a',
+                        },
+                        warm: {
+                            50: '#fff8f1',
+                            100: '#ffe8d1',
+                            200: '#ffd0a3',
+                            300: '#ffb274',
+                            400: '#ff9246',
+                            500: '#ff731a',
+                            600: '#e85a0e',
+                            700: '#c2440b',
+                            800: '#9c350f',
+                            900: '#7f2d12',
+                        }
+                    },
+                    fontFamily: {
+                        display: ['Playfair Display', 'serif'],
+                        body: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        .font-display { font-family: 'Playfair Display', serif; }
+        html { scroll-behavior: smooth; }
+        .hero-bg {
+            background: linear-gradient(135deg, rgba(127, 29, 29, 0.92) 0%, rgba(69, 10, 10, 0.88) 50%, rgba(146, 64, 14, 0.85) 100%),
+                        url('https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+        }
+        .product-card:hover .product-img { transform: scale(1.08); }
+        .product-img { transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .float-anim { animation: float 3s ease-in-out infinite; }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-up { animation: fadeInUp 0.6s ease forwards; }
+        .animate-delay-1 { animation-delay: 0.1s; opacity: 0; }
+        .animate-delay-2 { animation-delay: 0.2s; opacity: 0; }
+        .animate-delay-3 { animation-delay: 0.3s; opacity: 0; }
+        .animate-delay-4 { animation-delay: 0.4s; opacity: 0; }
+        .cut-badge { background: linear-gradient(135deg, #dc2626, #b91c1c); }
+        .nav-scrolled {
+            background: rgba(127, 29, 29, 0.98) !important;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #1a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #b91c1c; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #dc2626; }
+        .toast { animation: slideIn 0.4s ease, fadeOut 0.4s ease 2.6s forwards; }
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 overflow-x-hidden">
+    <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-transparent">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="#" class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-brand-600 rounded-xl flex items-center justify-center shadow-lg">
+                        <i data-lucide="beef" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <div>
+                        <span class="font-display text-xl font-bold text-white tracking-tight">Kevs Porkers</span>
+                        <span class="block text-xs text-brand-200 font-medium tracking-widest uppercase -mt-0.5">Ltd</span>
+                    </div>
+                </a>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#home" class="text-white/80 hover:text-white transition font-medium text-sm">Home</a>
+                    <a href="#about" class="text-white/80 hover:text-white transition font-medium text-sm">About</a>
+                    <a href="#products" class="text-white/80 hover:text-white transition font-medium text-sm">Products</a>
+                    <a href="#why-us" class="text-white/80 hover:text-white transition font-medium text-sm">Why Us</a>
+                    <a href="#testimonials" class="text-white/80 hover:text-white transition font-medium text-sm">Reviews</a>
+                    <a href="#contact" class="text-white/80 hover:text-white transition font-medium text-sm">Contact</a>
+                    <a href="#order" class="bg-brand-600 hover:bg-brand-500 text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition shadow-lg shadow-brand-900/30 hover:shadow-brand-600/40 flex items-center gap-2">
+                        <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+                        Order Now
+                    </a>
+                </div>
+                <button id="mobileMenuBtn" class="md:hidden text-white p-2" aria-label="Open menu">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobileMenu" class="hidden md:hidden bg-brand-900/98 backdrop-blur-xl border-t border-brand-800/50">
+            <div class="px-4 py-4 space-y-2">
+                <a href="#home" class="block py-3 px-4 text-white/80 hover:text-white hover:bg-brand-800/50 rounded-lg transition font-medium mobile-link">Home</a>
+                <a href="#about" class="block py-3 px-4 text-white/80 hover:text-white hover:bg-brand-800/50 rounded-lg transition font-medium mobile-link">About</a>
+                <a href="#products" class="block py-3 px-4 text-white/80 hover:text-white hover:bg-brand-800/50 rounded-lg transition font-medium mobile-link">Products</a>
+                <a href="#why-us" class="block py-3 px-4 text-white/80 hover:text-white hover:bg-brand-800/50 rounded-lg transition font-medium mobile-link">Why Us</a>
+                <a href="#testimonials" class="block py-3 px-4 text-white/80 hover:text-white hover:bg-brand-800/50 rounded-lg transition font-medium mobile-link">Reviews</a>
+                <a href="#contact" class="block py-3 px-4 text-white/80 hover:text-white hover:bg-brand-800/50 rounded-lg transition font-medium mobile-link">Contact</a>
+                <a href="#order" class="block py-3 px-4 bg-brand-600 text-white rounded-lg font-semibold text-center mobile-link">Order Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero-bg min-h-screen flex items-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40"></div>
+        <div class="absolute top-20 right-10 w-64 h-64 bg-warm-500/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 left-10 w-96 h-96 bg-brand-600/10 rounded-full blur-3xl"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-32">
+            <div class="max-w-3xl">
+                <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 py-2 mb-6 animate-fade-in-up animate-delay-1">
+                    <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                    <span class="text-white/90 text-sm font-medium">Open Mon-Sat | 6AM - 2PM</span>
+                </div>
+                <h1 class="font-display text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6 animate-fade-in-up animate-delay-2">
+                    Premium <span class="text-warm-300">Pork Cuts</span><br>
+                    From Ridgeways
+                </h1>
+                <p class="text-lg sm:text-xl text-white/80 mb-8 max-w-xl leading-relaxed animate-fade-in-up animate-delay-3">
+                    Nairobi's finest pork butchery. Fresh, locally sourced, and expertly cut pork delivered to your doorstep from our shop at Ridgeways Kiambu Road.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 animate-fade-in-up animate-delay-4">
+                    <a href="#products" class="bg-brand-600 hover:bg-brand-500 text-white px-8 py-4 rounded-xl font-semibold text-lg transition shadow-2xl shadow-brand-900/50 hover:shadow-brand-600/40 flex items-center justify-center gap-2 group">
+                        Browse Cuts
+                        <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                    <a href="#contact" class="bg-white/10 backdrop-blur-md hover:bg-white/20 border border-white/20 text-white px-8 py-4 rounded-xl font-semibold text-lg transition flex items-center justify-center gap-2">
+                        <i data-lucide="phone" class="w-5 h-5"></i>
+                        Call to Order
+                    </a>
+                </div>
+                <div class="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-white/10 max-w-md">
+                    <div>
+                        <div class="text-3xl font-bold text-white font-display">5K+</div>
+                        <div class="text-white/60 text-sm mt-1">Happy Customers</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-white font-display">100%</div>
+                        <div class="text-white/60 text-sm mt-1">Fresh Cuts</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-white font-display">Fast</div>
+                        <div class="text-white/60 text-sm mt-1">Delivery</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 float-anim">
+            <a href="#about" class="text-white/50 hover:text-white/80 transition" aria-label="Scroll to about">
+                <i data-lucide="chevron-down" class="w-8 h-8"></i>
+            </a>
+        </div>
+    </section>
+
+    <section id="about" class="py-20 lg:py-28 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                <div class="relative">
+                    <div class="rounded-2xl overflow-hidden shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?auto=format&fit=crop&w=1000&q=80" alt="Our butchery" class="w-full h-80 lg:h-[500px] object-cover">
+                    </div>
+                    <div class="absolute -bottom-6 -right-6 bg-brand-600 text-white p-6 rounded-2xl shadow-xl hidden lg:block">
+                        <div class="text-4xl font-bold font-display">12+</div>
+                        <div class="text-sm text-white/80 mt-1">Years Experience</div>
+                    </div>
+                    <div class="absolute -top-4 -left-4 bg-warm-500 text-white p-4 rounded-xl shadow-xl hidden lg:block">
+                        <i data-lucide="award" class="w-8 h-8"></i>
+                    </div>
+                </div>
+                <div>
+                    <div class="inline-flex items-center gap-2 bg-brand-50 text-brand-700 rounded-full px-4 py-2 mb-4">
+                        <i data-lucide="info" class="w-4 h-4"></i>
+                        <span class="text-sm font-semibold">About Us</span>
+                    </div>
+                    <h2 class="font-display text-4xl lg:text-5xl font-bold text-stone-900 mb-6 leading-tight">
+                        Nairobi's Most Trusted <span class="text-brand-600">Pork Butchery</span>
+                    </h2>
+                    <p class="text-stone-600 text-lg leading-relaxed mb-6">
+                        Located at Ridgeways, Kiambu Road, we've been serving the community with the finest pork cuts since 2018. Our commitment to quality, hygiene, and freshness has made us the go-to butchery for pork lovers across Kenya.
+                    </p>
+                    <p class="text-stone-600 leading-relaxed mb-8">
+                        We source our pork from certified local farms in Kiambu and Nakuru, ensuring every cut meets the highest health and safety standards. Whether you're preparing nyama choma, stew, or a special family recipe, we've got the perfect cut for you.
+                    </p>
+                    <div class="grid sm:grid-cols-2 gap-4 mb-8">
+                        <div class="flex items-start gap-3 bg-stone-50 p-4 rounded-xl">
+                            <div class="w-10 h-10 bg-brand-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="shield-check" class="w-5 h-5 text-brand-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-stone-900">Quality Certified</h4>
+                                <p class="text-sm text-stone-500 mt-0.5">All meat is quality certified</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 bg-stone-50 p-4 rounded-xl">
+                            <div class="w-10 h-10 bg-warm-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="truck" class="w-5 h-5 text-warm-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-stone-900">Fast Delivery</h4>
+                                <p class="text-sm text-stone-500 mt-0.5">Same-day delivery in Nairobi</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 bg-stone-50 p-4 rounded-xl">
+                            <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="leaf" class="w-5 h-5 text-green-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-stone-900">Farm Fresh</h4>
+                                <p class="text-sm text-stone-500 mt-0.5">Sourced from local farms</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3 bg-stone-50 p-4 rounded-xl">
+                            <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="thermometer" class="w-5 h-5 text-blue-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-stone-900">Cold Chain</h4>
+                                <p class="text-sm text-stone-500 mt-0.5">Properly stored and transported</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="products" class="py-20 lg:py-28 bg-gradient-to-b from-stone-50 to-stone-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14">
+                <div class="inline-flex items-center gap-2 bg-brand-50 text-brand-700 rounded-full px-4 py-2 mb-4">
+                    <i data-lucide="beef" class="w-4 h-4"></i>
+                    <span class="text-sm font-semibold">Our Products</span>
+                </div>
+                <h2 class="font-display text-4xl lg:text-5xl font-bold text-stone-900 mb-4">Premium Pork Cuts</h2>
+                <p class="text-stone-500 text-lg max-w-2xl mx-auto">
+                    Hand-selected and expertly prepared cuts, ready for your favorite recipes. Fresh daily at Ridgeways.
+                </p>
+            </div>
+            <div class="flex flex-wrap justify-center gap-3 mb-12">
+                <button class="category-btn active bg-brand-600 text-white px-5 py-2.5 rounded-xl font-medium text-sm transition shadow-md" data-category="all">All Cuts</button>
+                <button class="category-btn bg-white text-stone-600 hover:bg-brand-50 hover:text-brand-600 px-5 py-2.5 rounded-xl font-medium text-sm transition border border-stone-200" data-category="premium">Premium</button>
+                <button class="category-btn bg-white text-stone-600 hover:bg-brand-50 hover:text-brand-600 px-5 py-2.5 rounded-xl font-medium text-sm transition border border-stone-200" data-category="standard">Standard</button>
+                <button class="category-btn bg-white text-stone-600 hover:bg-brand-50 hover:text-brand-600 px-5 py-2.5 rounded-xl font-medium text-sm transition border border-stone-200" data-category="specialty">Specialty</button>
+            </div>
+            <div id="productsGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
+        </div>
+    </section>
+
+    <section id="why-us" class="py-20 lg:py-28 bg-brand-900 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-10 left-10 w-72 h-72 bg-brand-500 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-10 right-10 w-96 h-96 bg-warm-500 rounded-full blur-3xl"></div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-14">
+                <div class="inline-flex items-center gap-2 bg-white/10 text-white/90 rounded-full px-4 py-2 mb-4">
+                    <i data-lucide="star" class="w-4 h-4 text-warm-400"></i>
+                    <span class="text-sm font-semibold">Why Choose Us</span>
+                </div>
+                <h2 class="font-display text-4xl lg:text-5xl font-bold text-white mb-4">
+                    The <span class="text-warm-300">Kevs Porkers</span> Difference
+                </h2>
+                <p class="text-white/60 text-lg max-w-2xl mx-auto">
+                    We don't just sell pork. We deliver an experience backed by quality, trust, and community.
+                </p>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition group">
+                    <div class="w-14 h-14 bg-brand-600/20 rounded-xl flex items-center justify-center mb-5 group-hover:bg-brand-600/30 transition">
+                        <i data-lucide="heart-pulse" class="w-7 h-7 text-brand-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Health & Safety First</h3>
+                    <p class="text-white/60 leading-relaxed">All our pork undergoes strict quality checks and proper veterinary inspection before reaching our shelves.</p>
+                </div>
+                <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition group">
+                    <div class="w-14 h-14 bg-warm-600/20 rounded-xl flex items-center justify-center mb-5 group-hover:bg-warm-600/30 transition">
+                        <i data-lucide="clock" class="w-7 h-7 text-warm-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Fresh Daily</h3>
+                    <p class="text-white/60 leading-relaxed">New stock arrives every morning. We prepare every order with care for guaranteed freshness.</p>
+                </div>
+                <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition group">
+                    <div class="w-14 h-14 bg-green-600/20 rounded-xl flex items-center justify-center mb-5 group-hover:bg-green-600/30 transition">
+                        <i data-lucide="map-pin" class="w-7 h-7 text-green-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Prime Location</h3>
+                    <p class="text-white/60 leading-relaxed">Conveniently located at Ridgeways Kiambu Road, with easy access. Visit us or order for delivery.</p>
+                </div>
+                <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition group">
+                    <div class="w-14 h-14 bg-blue-600/20 rounded-xl flex items-center justify-center mb-5 group-hover:bg-blue-600/30 transition">
+                        <i data-lucide="scissors" class="w-7 h-7 text-blue-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Custom Cuts</h3>
+                    <p class="text-white/60 leading-relaxed">Tell us exactly how you want it. Our experienced butchers cut to your specification.</p>
+                </div>
+                <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition group">
+                    <div class="w-14 h-14 bg-purple-600/20 rounded-xl flex items-center justify-center mb-5 group-hover:bg-purple-600/30 transition">
+                        <i data-lucide="wallet" class="w-7 h-7 text-purple-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Fair Pricing</h3>
+                    <p class="text-white/60 leading-relaxed">Competitive prices without compromising quality. Premium pork should be accessible to everyone.</p>
+                </div>
+                <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition group">
+                    <div class="w-14 h-14 bg-yellow-600/20 rounded-xl flex items-center justify-center mb-5 group-hover:bg-yellow-600/30 transition">
+                        <i data-lucide="users" class="w-7 h-7 text-yellow-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Community</h3>
+                    <p class="text-white/60 leading-relaxed">We support local pig farmers and contribute to the growth of Kenya's agricultural sector through fair trade.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-gradient-to-r from-warm-500 to-brand-600 relative overflow-hidden">
+        <div class="absolute inset-0">
+            <div class="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+            <div class="absolute bottom-0 left-0 w-64 h-64 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+                <div>
+                    <div class="inline-flex items-center gap-2 bg-white/20 rounded-full px-4 py-1.5 mb-3">
+                        <i data-lucide="flame" class="w-4 h-4 text-white"></i>
+                        <span class="text-white font-semibold text-sm">Weekend Special</span>
+                    </div>
+                    <h3 class="font-display text-3xl lg:text-4xl font-bold text-white mb-2">20% Off All Premium Cuts</h3>
+                    <p class="text-white/80 text-lg">Every Saturday and Sunday. Fresh stock, amazing prices!</p>
+                </div>
+                <a href="#order" class="bg-white hover:bg-stone-50 text-brand-700 px-8 py-4 rounded-xl font-bold text-lg transition shadow-xl flex items-center gap-2 flex-shrink-0 group">
+                    Order Now
+                    <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="py-20 lg:py-28 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14">
+                <div class="inline-flex items-center gap-2 bg-brand-50 text-brand-700 rounded-full px-4 py-2 mb-4">
+                    <i data-lucide="message-circle" class="w-4 h-4"></i>
+                    <span class="text-sm font-semibold">Testimonials</span>
+                </div>
+                <h2 class="font-display text-4xl lg:text-5xl font-bold text-stone-900 mb-4">What Our Customers Say</h2>
+                <p class="text-stone-500 text-lg max-w-2xl mx-auto">
+                    Don't just take our word for it. Hear from the pork lovers who trust Kevs Porkers Ltd.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-stone-50 rounded-2xl p-8 border border-stone-100 hover:shadow-lg transition">
+                    <div class="flex items-center gap-1 mb-4">
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i><i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i><i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i><i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i><i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                    </div>
+                    <p class="text-stone-600 leading-relaxed mb-6">"The best pork I've found in Nairobi! Their ribs are perfect for weekend nyama choma. Always fresh, always tasty. My family loves it."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 bg-brand-100 rounded-full flex items-center justify-center"><span class="font-bold text-brand-700">WM</span></div>
+                        <div><div class="font-semibold text-stone-900">Wanjiku M.</div><div class="text-sm text-stone-400">Regular Customer</div></div>
+                    </div>
+                </div>
+                <div class="bg-stone-50 rounded-2xl p-8 border border-stone-100 hover:shadow-lg transition">
+                    <div class="flex items-center gap-1 mb-4">
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i><i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i><i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i><i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i><i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                    </div>
+                    <p class="text-stone-600 leading-relaxed mb-6">"I own a restaurant in Westlands and I get all my pork from Kevs Porkers Ltd. Consistent quality, fair pricing, and their delivery service is reliable."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 bg-warm-100 rounded-full flex items-center justify-center"><span class="font-bold text-warm-700">JO</span></div>
+                        <div><div class="font-semibold text-stone-900">James O.</div><div class="text-sm text-stone-400">Restaurant Owner</div></div>
+                    </div>
+                </div>
+                <div class="bg-stone-50 rounded-2xl p-8 border border-stone-100 hover:shadow-lg transition">
+                    <div class="flex items-center gap-1 mb-4">
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i><i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i><i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i><i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i><i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400"></i>
+                    </div>
+                    <p class="text-stone-600 leading-relaxed mb-6">"Their custom cutting service is amazing! I asked for specific cuts for my samosas and they got it exactly right. Saving me so much prep time."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center"><span class="font-bold text-green-700">AN</span></div>
+                        <div><div class="font-semibold text-stone-900">Amina N.</div><div class="text-sm text-stone-400">Caterer</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="order" class="py-20 lg:py-28 bg-gradient-to-b from-stone-100 to-stone-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-start">
+                <div>
+                    <div class="inline-flex items-center gap-2 bg-brand-50 text-brand-700 rounded-full px-4 py-2 mb-4">
+                        <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+                        <span class="text-sm font-semibold">Place Your Order</span>
+                    </div>
+                    <h2 class="font-display text-4xl lg:text-5xl font-bold text-stone-900 mb-6 leading-tight">
+                        Order Your <span class="text-brand-600">Fresh Pork</span> Today
+                    </h2>
+                    <p class="text-stone-600 text-lg leading-relaxed mb-8">
+                        Fill in the order form and we'll prepare your cut fresh. Pick up at Ridgeways Kiambu Road or get it delivered right to your doorstep within Kiambu and Nairobi.
+                    </p>
+                    <div class="space-y-5">
+                        <div class="flex items-start gap-4 bg-white p-5 rounded-xl border border-stone-200">
+                            <div class="w-12 h-12 bg-brand-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="truck" class="w-6 h-6 text-brand-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-stone-900">Same-Day Delivery</h4>
+                                <p class="text-stone-500 text-sm mt-1">Orders placed before 1PM are delivered the same day within Nairobi</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4 bg-white p-5 rounded-xl border border-stone-200">
+                            <div class="w-12 h-12 bg-warm-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="credit-card" class="w-6 h-6 text-warm-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-stone-900">M-Pesa & Cash</h4>
+                                <p class="text-stone-500 text-sm mt-1">Pay via M-Pesa (0791425555) or cash on delivery/pickup</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4 bg-white p-5 rounded-xl border border-stone-200">
+                            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="package-check" class="w-6 h-6 text-green-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-stone-900">Vacuum Sealed</h4>
+                                <p class="text-stone-500 text-sm mt-1">All orders are vacuum-sealed for maximum freshness and hygiene</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl shadow-xl border border-stone-100 p-8">
+                    <h3 class="font-display text-2xl font-bold text-stone-900 mb-6">Order Details</h3>
+                    <form id="orderForm" class="space-y-5">
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-stone-700 mb-2">Full Name *</label>
+                                <input type="text" required class="w-full px-4 py-3 rounded-xl border border-stone-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none transition" placeholder="e.g. John Kamau">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-stone-700 mb-2">Phone Number *</label>
+                                <input type="tel" required class="w-full px-4 py-3 rounded-xl border border-stone-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none transition" placeholder="e.g. 0712 345 678">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-stone-700 mb-2">Email</label>
+                            <input type="email" class="w-full px-4 py-3 rounded-xl border border-stone-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none transition" placeholder="kevsporkers@gmail.com">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-stone-700 mb-2">Select Cut *</label>
+                            <select required class="w-full px-4 py-3 rounded-xl border border-stone-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none transition bg-white">
+                                <option value="">Choose a cut...</option>
+                                <option>Pork Ribs (Premium)</option>
+                                <option>Pork Belly (Premium)</option>
+                                <option>Pork Chops (Standard)</option>
+                                <option>Pork Sausages (Specialty)</option>
+                                <option>Pork Fillet (Premium)</option>
+                                <option>Pork Shoulder (Standard)</option>
+                                <option>Pork Bacon (Specialty)</option>
+                                <option>Pork Liver (Standard)</option>
+                                <option>Boneless Pork Leg (Premium)</option>
+                                <option>Pork Trotters (Specialty)</option>
+                                <option>Whole Pork (Custom Order)</option>
+                            </select>
+                        </div>
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-semibold text-stone-700 mb-2">Quantity (kg) *</label>
+                                <input type="number" min="0.5" step="0.5" required class="w-full px-4 py-3 rounded-xl border border-stone-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none transition" placeholder="e.g. 2">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-stone-700 mb-2">Delivery Method *</label>
+                                <select required class="w-full px-4 py-3 rounded-xl border border-stone-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none transition bg-white">
+                                    <option value="">Choose...</option>
+                                    <option>Pickup at Kevs Porkers Ltd</option>
+                                    <option>Home Delivery (Nairobi/Kiambu)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-stone-700 mb-2">Special Instructions</label>
+                            <textarea rows="3" class="w-full px-4 py-3 rounded-xl border border-stone-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none transition resize-none" placeholder="E.g., Cut into small pieces for stew..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-brand-600 hover:bg-brand-500 text-white py-4 rounded-xl font-semibold text-lg transition shadow-lg shadow-brand-900/20 hover:shadow-brand-600/40 flex items-center justify-center gap-2">
+                            <i data-lucide="send" class="w-5 h-5"></i>
+                            Submit Order
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 lg:py-28 bg-stone-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14">
+                <div class="inline-flex items-center gap-2 bg-white/10 text-white/90 rounded-full px-4 py-2 mb-4">
+                    <i data-lucide="map-pin" class="w-4 h-4 text-brand-400"></i>
+                    <span class="text-sm font-semibold">Find Us</span>
+                </div>
+                <h2 class="font-display text-4xl lg:text-5xl font-bold mb-4">
+                    Visit Us at <span class="text-warm-300">Kevs Porkers</span>
+                </h2>
+                <p class="text-stone-400 text-lg max-w-2xl mx-auto">
+                    Located at Ridgeways, Kiambu Road, Nairobi. Open 6 days a week.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <a href="tel:+254791423555" class="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition text-center group">
+                    <div class="w-14 h-14 bg-brand-600/20 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:bg-brand-600/30 transition">
+                        <i data-lucide="phone" class="w-7 h-7 text-brand-400"></i>
+                    </div>
+                    <h4 class="font-semibold mb-1">Call Us</h4>
+                    <p class="text-stone-400 text-sm">+254 791 423 555</p>
+                </a>
+                <a href="https://wa.me/254791423555" target="_blank" rel="noopener" class="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition text-center group">
+                    <div class="w-14 h-14 bg-green-600/20 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:bg-green-600/30 transition">
+                        <i data-lucide="message-circle" class="w-7 h-7 text-green-400"></i>
+                    </div>
+                    <h4 class="font-semibold mb-1">WhatsApp</h4>
+                    <p class="text-stone-400 text-sm">+254 791 423 555</p>
+                </a>
+                <div class="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition text-center group">
+                    <div class="w-14 h-14 bg-warm-600/20 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:bg-warm-600/30 transition">
+                        <i data-lucide="clock" class="w-7 h-7 text-warm-400"></i>
+                    </div>
+                    <h4 class="font-semibold mb-1">Hours</h4>
+                    <p class="text-stone-400 text-sm">Mon-Sat: 6AM - 2PM</p>
+                    <p class="text-stone-400 text-sm">Sun: closed</p>
+                </div>
+                <div class="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition text-center group">
+                    <div class="w-14 h-14 bg-blue-600/20 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-600/30 transition">
+                        <i data-lucide="map-pin" class="w-7 h-7 text-blue-400"></i>
+                    </div>
+                    <h4 class="font-semibold mb-1">Location</h4>
+                    <p class="text-stone-400 text-sm">Ridgeways,</p>
+                    <p class="text-stone-400 text-sm">Kiambu Road, Nairobi</p>
+                </div>
+            </div>
+            <div class="mt-12 rounded-2xl overflow-hidden border border-white/10">
+                <iframe
+                    src="https://www.google.com/maps?q=Pigslaughterhouse%20Ridgeways&output=embed"
+                    width="100%"
+                    height="350"
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    class="w-full">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-stone-950 text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-brand-600 rounded-xl flex items-center justify-center">
+                            <i data-lucide="beef" class="w-7 h-7 text-white"></i>
+                        </div>
+                        <div>
+                            <span class="font-display text-xl font-bold text-white">Kevs Porkers</span>
+                            <span class="block text-xs text-brand-300 font-medium tracking-widest uppercase -mt-0.5">Ltd</span>
+                        </div>
+                    </div>
+                    <p class="text-stone-400 text-sm leading-relaxed mb-4">
+                        Nairobi's finest pork butchery, located at Ridgeways, Kiambu Road. Fresh, quality pork cuts since 2018.
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <a href="#" class="w-10 h-10 bg-white/10 hover:bg-brand-600 rounded-lg flex items-center justify-center transition" aria-label="Facebook"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+                        <a href="#" class="w-10 h-10 bg-white/10 hover:bg-brand-600 rounded-lg flex items-center justify-center transition" aria-label="Instagram"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                        <a href="#" class="w-10 h-10 bg-white/10 hover:bg-brand-600 rounded-lg flex items-center justify-center transition" aria-label="Twitter"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Quick Links</h4>
+                    <ul class="space-y-2.5">
+                        <li><a href="#home" class="text-stone-400 hover:text-white transition text-sm">Home</a></li>
+                        <li><a href="#about" class="text-stone-400 hover:text-white transition text-sm">About Us</a></li>
+                        <li><a href="#products" class="text-stone-400 hover:text-white transition text-sm">Products</a></li>
+                        <li><a href="#order" class="text-stone-400 hover:text-white transition text-sm">Order Online</a></li>
+                        <li><a href="#contact" class="text-stone-400 hover:text-white transition text-sm">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Popular Cuts</h4>
+                    <ul class="space-y-2.5">
+                        <li><a href="#products" class="text-stone-400 hover:text-white transition text-sm">Pork Ribs</a></li>
+                        <li><a href="#products" class="text-stone-400 hover:text-white transition text-sm">Pork Belly</a></li>
+                        <li><a href="#products" class="text-stone-400 hover:text-white transition text-sm">Pork Chops</a></li>
+                        <li><a href="#products" class="text-stone-400 hover:text-white transition text-sm">Pork Sausages</a></li>
+                        <li><a href="#products" class="text-stone-400 hover:text-white transition text-sm">Pork Bacon</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Newsletter</h4>
+                    <p class="text-stone-400 text-sm mb-4">Get weekly specials and updates delivered to your inbox.</p>
+                    <form id="newsletterForm" class="flex gap-2">
+                        <input type="email" required placeholder="Your email" class="flex-1 min-w-0 px-4 py-3 rounded-xl bg-white/10 border border-white/10 text-white placeholder-stone-500 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-none text-sm transition">
+                        <button type="submit" class="bg-brand-600 hover:bg-brand-500 px-5 py-3 rounded-xl transition font-semibold text-sm flex-shrink-0" aria-label="Subscribe">
+                            <i data-lucide="send" class="w-4 h-4"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p class="text-stone-500 text-sm">&copy; 2026 Kevs Porkers Ltd. All rights reserved.</p>
+                <p class="text-stone-500 text-sm">Made in Nairobi, Kenya</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="toastContainer" class="fixed top-24 right-4 z-[60] space-y-3"></div>
+
+    <a href="https://wa.me/254791423555" target="_blank" rel="noopener" class="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-xl hover:shadow-2xl transition-all hover:scale-110 group" aria-label="Chat on WhatsApp">
+        <i data-lucide="message-circle" class="w-7 h-7 group-hover:animate-pulse"></i>
+        <span class="absolute -top-1 -right-1 w-4 h-4 bg-brand-500 rounded-full animate-ping"></span>
+        <span class="absolute -top-1 -right-1 w-4 h-4 bg-brand-500 rounded-full"></span>
+    </a>
+
+    <script>
+        lucide.createIcons();
+
+        const products = [
+            {
+                name: "Pork Ribs",
+                price: 850,
+                category: "premium",
+                badge: "Bestseller",
+                desc: "Tender, meaty ribs perfect for grilling and nyama choma.",
+                img: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=80",
+                icon: "flame"
+            },
+            {
+                name: "Pork Belly",
+                price: 750,
+                category: "premium",
+                badge: "Popular",
+                desc: "Rich, fatty cut ideal for slow roasting and crispy belly.",
+                img: "https://images.unsplash.com/photo-1615937691194-97dbd3f3dc29?auto=format&fit=crop&w=900&q=80",
+                icon: "chef-hat"
+            },
+            {
+                name: "Pork Chops",
+                price: 800,
+                category: "standard",
+                badge: null,
+                desc: "Bone-in chops for quick pan-frying or braai.",
+                img: "https://images.unsplash.com/photo-1432139555190-58524dae6a55?auto=format&fit=crop&w=900&q=80",
+                icon: "utensils"
+            },
+            {
+                name: "Pork Sausages",
+                price: 650,
+                category: "specialty",
+                badge: "House-made",
+                desc: "Seasoned and stuffed in-house with our secret spice blend.",
+                img: "https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?auto=format&fit=crop&w=900&q=80",
+                icon: "sparkles"
+            },
+            {
+                name: "Pork Fillet",
+                price: 1100,
+                category: "premium",
+                badge: "Premium",
+                desc: "The most tender cut, perfect for quick searing and stir-fry.",
+                img: "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=900&q=80",
+                icon: "crown"
+            },
+            {
+                name: "Pork Shoulder",
+                price: 600,
+                category: "standard",
+                badge: null,
+                desc: "Great for slow cooking, stews, and pulled pork.",
+                img: "https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=900&q=80",
+                icon: "soup"
+            },
+            {
+                name: "Pork Bacon",
+                price: 1200,
+                category: "specialty",
+                badge: "Smoked",
+                desc: "Smoky, crispy bacon streaks for breakfast and burgers.",
+                img: "https://images.unsplash.com/photo-1528607929212-2636ec44253e?auto=format&fit=crop&w=900&q=80",
+                icon: "flame"
+            },
+            {
+                name: "Pork Liver",
+                price: 450,
+                category: "standard",
+                badge: null,
+                desc: "Nutrient-rich and flavorful, great for frying and stew.",
+                img: "https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?auto=format&fit=crop&w=900&q=80",
+                icon: "heart-pulse"
+            }
+        ];
+
+        function renderProducts(category = 'all') {
+            const grid = document.getElementById('productsGrid');
+            const filtered = category === 'all' ? products : products.filter(p => p.category === category);
+
+            grid.innerHTML = filtered.map((product, i) => `
+                <div class="product-card bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 border border-stone-100 group" style="animation: fadeInUp 0.5s ease forwards; animation-delay: ${i * 0.08}s; opacity: 0;">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="${product.img}" alt="${product.name}" class="product-img w-full h-full object-cover">
+                        ${product.badge ? `<span class="cut-badge absolute top-3 left-3 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">${product.badge}</span>` : ''}
+                        <div class="absolute top-3 right-3 w-9 h-9 bg-white/90 backdrop-blur-sm rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition shadow-sm">
+                            <i data-lucide="${product.icon}" class="w-4 h-4 text-brand-600"></i>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex items-center justify-between gap-3 mb-2">
+                            <h3 class="font-display font-bold text-lg text-stone-900">${product.name}</h3>
+                            <span class="text-xs font-semibold uppercase tracking-wide text-stone-400 bg-stone-100 px-2 py-1 rounded">${product.category}</span>
+                        </div>
+                        <p class="text-stone-500 text-sm mb-4 leading-relaxed">${product.desc}</p>
+                        <div class="flex items-center justify-between gap-3">
+                            <div>
+                                <span class="text-2xl font-bold text-brand-600">KSh ${product.price}</span>
+                                <span class="text-stone-400 text-sm">/kg</span>
+                            </div>
+                            <button onclick="addToCart('${product.name}', ${product.price})" class="bg-brand-600 hover:bg-brand-500 text-white px-4 py-2.5 rounded-xl font-semibold text-sm transition shadow-md hover:shadow-lg flex items-center gap-1.5">
+                                <i data-lucide="plus" class="w-4 h-4"></i>
+                                Add
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            lucide.createIcons();
+        }
+
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.category-btn').forEach(b => {
+                    b.classList.remove('bg-brand-600', 'text-white', 'shadow-md');
+                    b.classList.add('bg-white', 'text-stone-600', 'border', 'border-stone-200');
+                });
+                btn.classList.remove('bg-white', 'text-stone-600', 'border', 'border-stone-200');
+                btn.classList.add('bg-brand-600', 'text-white', 'shadow-md');
+                renderProducts(btn.dataset.category);
+            });
+        });
+
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            const bgColor = type === 'success' ? 'bg-green-500' : type === 'error' ? 'bg-red-500' : 'bg-brand-600';
+            const icon = type === 'success' ? 'check-circle' : type === 'error' ? 'x-circle' : 'shopping-cart';
+
+            toast.className = `toast ${bgColor} text-white px-5 py-3 rounded-xl shadow-2xl flex items-center gap-3 min-w-[280px]`;
+            toast.innerHTML = `
+                <i data-lucide="${icon}" class="w-5 h-5 flex-shrink-0"></i>
+                <span class="font-medium text-sm">${message}</span>
+            `;
+            container.appendChild(toast);
+            lucide.createIcons();
+
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+
+        function addToCart(name, price) {
+            showToast(`${name} added to cart - KSh ${price}/kg`, 'success');
+        }
+
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('nav-scrolled');
+            } else {
+                navbar.classList.remove('nav-scrolled');
+            }
+        });
+
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        document.getElementById('orderForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            showToast("Order placed successfully! We'll contact you shortly.", 'success');
+            e.target.reset();
+        });
+
+        document.getElementById('newsletterForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            showToast('Subscribed! Check your inbox for weekly specials.', 'info');
+            e.target.reset();
+        });
+
+        renderProducts();
+    </script>
+</body>
+</html>
