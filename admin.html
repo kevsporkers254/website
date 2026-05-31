@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kevs Porkers Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: Inter, sans-serif; }
+        .toast { animation: slideIn 0.25s ease, fadeOut 0.35s ease 4s forwards; }
+        @keyframes slideIn {
+            from { transform: translateY(-10px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes fadeOut {
+            to { opacity: 0; }
+        }
+    </style>
+</head>
+<body class="bg-stone-100 text-stone-900 min-h-screen">
+    <header class="bg-stone-950 text-white">
+        <div class="max-w-6xl mx-auto px-4 py-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+                <h1 class="text-xl font-bold">Kevs Porkers Admin</h1>
+                <p class="text-sm text-stone-400">Edit product prices, descriptions, badges, categories, and photos.</p>
+            </div>
+            <a href="index.html" class="text-sm font-semibold bg-white/10 hover:bg-white/15 px-4 py-2 rounded-lg">View Site</a>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-8">
+        <section id="loginPanel" class="bg-white rounded-xl border border-stone-200 shadow-sm p-6 mb-6">
+            <h2 class="text-lg font-bold mb-2">Admin Login</h2>
+            <p class="text-sm text-stone-500 mb-5">
+                Enter a GitHub fine-grained token with contents read/write access to <strong>kevsporkers254/website</strong>.
+                The token stays in this browser tab only and is not saved into the website.
+            </p>
+            <div class="grid lg:grid-cols-[1fr_auto] gap-3">
+                <input id="tokenInput" type="password" class="w-full rounded-lg border border-stone-300 px-4 py-3 outline-none focus:border-red-500 focus:ring-2 focus:ring-red-100" placeholder="GitHub token">
+                <button id="loginBtn" class="bg-red-700 hover:bg-red-600 text-white font-bold px-6 py-3 rounded-lg">Login</button>
+            </div>
+            <details class="mt-4 text-sm text-stone-600">
+                <summary class="cursor-pointer font-semibold text-stone-800">How to create the token</summary>
+                <ol class="list-decimal pl-5 mt-3 space-y-1">
+                    <li>Open GitHub Settings, then Developer settings.</li>
+                    <li>Create a fine-grained personal access token.</li>
+                    <li>Select repository access for <strong>kevsporkers254/website</strong>.</li>
+                    <li>Give <strong>Contents</strong> permission: read and write.</li>
+                    <li>Copy the token and paste it here when you need to edit.</li>
+                </ol>
+            </details>
+        </section>
+
+        <section id="editorPanel" class="hidden">
+            <div class="bg-white rounded-xl border border-stone-200 shadow-sm p-4 mb-6 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                <div>
+                    <h2 class="font-bold">Product Editor</h2>
+                    <p id="statusText" class="text-sm text-stone-500">Loaded products from GitHub.</p>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <button id="reloadBtn" class="bg-stone-100 hover:bg-stone-200 text-stone-900 font-semibold px-4 py-2 rounded-lg">Reload</button>
+                    <button id="logoutBtn" class="bg-stone-900 hover:bg-stone-800 text-white font-semibold px-4 py-2 rounded-lg">Logout</button>
+                </div>
+            </div>
+            <div id="productsEditor" class="space-y-5"></div>
+        </section>
+    </main>
+
+    <div id="toastContainer" class="fixed top-4 right-4 z-50 space-y-2"></div>
+
+    <script>
+        const repo = {
+            owner: 'kevsporkers254',
+            name: 'website',
+            branch: 'main',
+            productsPath: 'products.json'
+        };
+
+        let token = '';
+        let products = [];
+        let productsSha = '';
+
+        const loginPanel = document.getElementById('loginPanel');
+        const editorPanel = document.getElementById('editorPanel');
+        const productsEditor = document.getElementById('productsEditor');
+        const statusText = document.getElementById('statusText');
+
+        function showToast(message, isError = false) {
+            const toast = document.createElement('div');
+            toast.className = `toast ${isError ? 'bg-red-600' : 'bg-green-600'} text-white rounded-lg shadow-lg px-4 py-3 text-sm font-semibold max-w-sm`;
+            toast.textContent = message;
+            document.getElementById('toastContainer').appendChild(toast);
+            setTimeout(() => toast.remove(), 4500);
+        }
+
+        function apiUrl(path) {
+            return `https://api.github.com/repos/${repo.owner}/${repo.name}/contents/${path}`;
+        }
+
+        async function githubRequest(path, options = {}) {
+            const response = await fetch(path.startsWith('http') ? path : apiUrl(path), {
+                ...options,
+                headers: {
+                    Accept: 'application/vnd.github+json',
+                    Authorization: `Bearer ${token}`,
+                    'X-GitHub-Api-Version': '2022-11-28',
+                    ...(options.headers || {})
+                }
+            });
+            const data = await response.json().catch(() => ({}));
+            if (!response.ok) {
+                throw new Error(data.message || 'GitHub request failed');
+            }
+            return data;
+        }
+
+        function decodeBase64Utf8(value) {
+            const binary = atob(value.replace(/\n/g, ''));
+            const bytes = Uint8Array.from(binary, char => char.charCodeAt(0));
+            return new TextDecoder().decode(bytes);
+        }
+
+        function encodeBase64Utf8(value) {
+            const bytes = new TextEncoder().encode(value);
+            let binary = '';
+            bytes.forEach(byte => binary += String.fromCharCode(byte));
+            return btoa(binary);
+        }
+
+        function slugify(value) {
+            return value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'product';
+        }
+
+        function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(String(reader.result).split(',')[1]);
+                reader.onerror = () => reject(new Error('Could not read image file'));
+                reader.readAsDataURL(file);
+            });
+        }
+
+        async function loadProducts() {
+            statusText.textContent = 'Loading products from GitHub...';
+            const file = await githubRequest(`${repo.productsPath}?ref=${repo.branch}`);
+            productsSha = file.sha;
+            products = JSON.parse(decodeBase64Utf8(file.content));
+            renderEditor();
+            statusText.textContent = `Loaded ${products.length} products.`;
+        }
+
+        function renderEditor() {
+            productsEditor.innerHTML = products.map((product, index) => `
+                <article class="bg-white rounded-xl border border-stone-200 shadow-sm overflow-hidden">
+                    <div class="grid lg:grid-cols-[220px_1fr]">
+                        <div class="bg-stone-100">
+                            <img src="${product.img}" alt="${product.name}" class="w-full h-56 lg:h-full object-cover" onerror="this.src=''; this.alt='Image unavailable';">
+                        </div>
+                        <div class="p-5 grid md:grid-cols-2 gap-4">
+                            <label class="block">
+                                <span class="text-sm font-semibold text-stone-700">Name</span>
+                                <input data-index="${index}" data-field="name" value="${escapeAttribute(product.name)}" class="editor-field mt-1 w-full rounded-lg border border-stone-300 px-3 py-2">
+                            </label>
+                            <label class="block">
+                                <span class="text-sm font-semibold text-stone-700">Price KSh</span>
+                                <input data-index="${index}" data-field="price" type="number" min="0" value="${product.price}" class="editor-field mt-1 w-full rounded-lg border border-stone-300 px-3 py-2">
+                            </label>
+                            <label class="block">
+                                <span class="text-sm font-semibold text-stone-700">Category</span>
+                                <select data-index="${index}" data-field="category" class="editor-field mt-1 w-full rounded-lg border border-stone-300 px-3 py-2 bg-white">
+                                    ${['premium', 'standard', 'specialty'].map(category => `<option value="${category}" ${product.category === category ? 'selected' : ''}>${category}</option>`).join('')}
+                                </select>
+                            </label>
+                            <label class="block">
+                                <span class="text-sm font-semibold text-stone-700">Badge</span>
+                                <input data-index="${index}" data-field="badge" value="${escapeAttribute(product.badge || '')}" placeholder="Optional" class="editor-field mt-1 w-full rounded-lg border border-stone-300 px-3 py-2">
+                            </label>
+                            <label class="block md:col-span-2">
+                                <span class="text-sm font-semibold text-stone-700">Description</span>
+                                <textarea data-index="${index}" data-field="desc" rows="2" class="editor-field mt-1 w-full rounded-lg border border-stone-300 px-3 py-2">${escapeHtml(product.desc)}</textarea>
+                            </label>
+                            <label class="block md:col-span-2">
+                                <span class="text-sm font-semibold text-stone-700">Image URL or Path</span>
+                                <input data-index="${index}" data-field="img" value="${escapeAttribute(product.img)}" class="editor-field mt-1 w-full rounded-lg border border-stone-300 px-3 py-2">
+                            </label>
+                            <label class="block md:col-span-2">
+                                <span class="text-sm font-semibold text-stone-700">Upload New Photo</span>
+                                <input data-index="${index}" type="file" accept="image/*" class="image-field mt-1 w-full rounded-lg border border-stone-300 px-3 py-2 bg-white">
+                            </label>
+                            <div class="md:col-span-2 flex flex-wrap gap-2 justify-end">
+                                <button data-index="${index}" class="save-btn bg-red-700 hover:bg-red-600 text-white font-bold px-5 py-2.5 rounded-lg">Save Product</button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            `).join('');
+
+            document.querySelectorAll('.editor-field').forEach(field => {
+                field.addEventListener('input', updateLocalProduct);
+                field.addEventListener('change', updateLocalProduct);
+            });
+            document.querySelectorAll('.save-btn').forEach(button => {
+                button.addEventListener('click', () => saveProduct(Number(button.dataset.index)));
+            });
+        }
+
+        function escapeHtml(value = '') {
+            return String(value)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;');
+        }
+
+        function escapeAttribute(value = '') {
+            return escapeHtml(value).replace(/"/g, '&quot;');
+        }
+
+        function updateLocalProduct(event) {
+            const index = Number(event.target.dataset.index);
+            const field = event.target.dataset.field;
+            if (field === 'price') {
+                products[index][field] = Number(event.target.value || 0);
+                return;
+            }
+            if (field === 'badge') {
+                products[index][field] = event.target.value.trim() || null;
+                return;
+            }
+            products[index][field] = event.target.value;
+        }
+
+        async function saveProduct(index) {
+            const saveButton = document.querySelector(`.save-btn[data-index="${index}"]`);
+            const imageInput = document.querySelector(`.image-field[data-index="${index}"]`);
+            saveButton.disabled = true;
+            saveButton.textContent = 'Saving...';
+            try {
+                if (imageInput.files[0]) {
+                    const file = imageInput.files[0];
+                    const extension = (file.name.split('.').pop() || 'jpg').toLowerCase();
+                    const imagePath = `assets/${slugify(products[index].name)}-${Date.now()}.${extension}`;
+                    const content = await fileToBase64(file);
+                    await githubRequest(imagePath, {
+                        method: 'PUT',
+                        body: JSON.stringify({
+                            message: `Upload ${products[index].name} photo`,
+                            content,
+                            branch: repo.branch
+                        })
+                    });
+                    products[index].img = imagePath;
+                }
+
+                const latest = await githubRequest(`${repo.productsPath}?ref=${repo.branch}`);
+                productsSha = latest.sha;
+                await githubRequest(repo.productsPath, {
+                    method: 'PUT',
+                    body: JSON.stringify({
+                        message: `Update ${products[index].name}`,
+                        content: encodeBase64Utf8(`${JSON.stringify(products, null, 2)}\n`),
+                        sha: productsSha,
+                        branch: repo.branch
+                    })
+                });
+
+                showToast(`${products[index].name} saved. GitHub Pages will rebuild shortly.`);
+                await loadProducts();
+            } catch (error) {
+                showToast(error.message, true);
+            } finally {
+                saveButton.disabled = false;
+                saveButton.textContent = 'Save Product';
+            }
+        }
+
+        document.getElementById('loginBtn').addEventListener('click', async () => {
+            token = document.getElementById('tokenInput').value.trim();
+            if (!token) {
+                showToast('Enter a GitHub token first.', true);
+                return;
+            }
+            try {
+                await loadProducts();
+                loginPanel.classList.add('hidden');
+                editorPanel.classList.remove('hidden');
+                showToast('Admin login successful.');
+            } catch (error) {
+                token = '';
+                showToast(error.message, true);
+            }
+        });
+
+        document.getElementById('reloadBtn').addEventListener('click', () => {
+            loadProducts().then(() => showToast('Products reloaded.')).catch(error => showToast(error.message, true));
+        });
+
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            token = '';
+            products = [];
+            productsSha = '';
+            document.getElementById('tokenInput').value = '';
+            editorPanel.classList.add('hidden');
+            loginPanel.classList.remove('hidden');
+            showToast('Logged out.');
+        });
+    </script>
+</body>
+</html>
