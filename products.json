@@ -1,20 +1,20 @@
 [
   {
-    "name": "Pork Ribs",
-    "price": 850,
+    "name": "Rindless pork chops",
+    "price": 0,
     "category": "premium",
     "badge": "Bestseller",
     "desc": "Tender, meaty ribs perfect for grilling and nyama choma.",
-    "img": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=80",
+    "img": "assets/rindless-pork-chops-1780219704876.jpg",
     "icon": "flame"
   },
   {
     "name": "Pork Belly",
-    "price": 0,
+    "price": 750,
     "category": "premium",
     "badge": "Popular",
-    "desc": "Rich, fatty cut ideal for slow roasting and crispy belly.",
-    "img": "https://images.unsplash.com/photo-1615937691194-97dbd3f3dc29?auto=format&fit=crop&w=900&q=80",
+    "desc": "Rich, fatty cut ideal for slow roasting",
+    "img": "assets/pork-belly-1780219545441.jpg",
     "icon": "chef-hat"
   },
   {
@@ -27,12 +27,12 @@
     "icon": "utensils"
   },
   {
-    "name": "Rindon full carcass",
+    "name": "Rindless pork full carcasses",
     "price": 0,
-    "category": "specialty",
-    "badge": "fresh",
+    "category": "premium",
+    "badge": "fresh meat",
     "desc": "",
-    "img": "assets/rindon-full-carcass-1780219803415.jpg",
+    "img": "assets/rindless-pork-full-carcasses-1780220197916.jpg",
     "icon": "sparkles"
   },
   {
@@ -41,7 +41,7 @@
     "category": "premium",
     "badge": "Premium",
     "desc": "The most tender cut, perfect for quick searing and stir-fry.",
-    "img": "assets/pork-fillet-1780220110403.jpg",
+    "img": "assets/pork-fillet-1780219887126.jpg",
     "icon": "crown"
   },
   {
@@ -50,16 +50,16 @@
     "category": "premium",
     "badge": null,
     "desc": "Great for slow cooking, stews, and pulled pork.",
-    "img": "assets/pork-loin-boneless-1780219973319.jpg",
+    "img": "assets/pork-loin-boneless-1780220378815.jpg",
     "icon": "soup"
   },
   {
-    "name": "Rindon pork hindleg",
-    "price": 0,
+    "name": "Pork Bacon",
+    "price": 1200,
     "category": "specialty",
-    "badge": "popular",
-    "desc": "",
-    "img": "assets/rindon-pork-hindleg-1780220283964.jpg",
+    "badge": "Smoked",
+    "desc": "Smoky, crispy bacon streaks for breakfast and burgers.",
+    "img": "https://images.unsplash.com/photo-1528607929212-2636ec44253e?auto=format&fit=crop&w=900&q=80",
     "icon": "flame"
   },
   {
