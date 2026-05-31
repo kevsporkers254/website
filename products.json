@@ -1,20 +1,20 @@
 [
   {
-    "name": "Rindless pork chops",
-    "price": 0,
+    "name": "Pork Ribs",
+    "price": 850,
     "category": "premium",
     "badge": "Bestseller",
     "desc": "Tender, meaty ribs perfect for grilling and nyama choma.",
-    "img": "assets/rindless-pork-chops-1780219704876.jpg",
+    "img": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=80",
     "icon": "flame"
   },
   {
     "name": "Pork Belly",
-    "price": 750,
+    "price": 0,
     "category": "premium",
     "badge": "Popular",
-    "desc": "Rich, fatty cut ideal for slow roasting",
-    "img": "assets/pork-belly-1780219545441.jpg",
+    "desc": "Rich, fatty cut ideal for slow roasting and crispy belly.",
+    "img": "https://images.unsplash.com/photo-1615937691194-97dbd3f3dc29?auto=format&fit=crop&w=900&q=80",
     "icon": "chef-hat"
   },
   {
@@ -27,30 +27,30 @@
     "icon": "utensils"
   },
   {
-    "name": "Pork ",
-    "price": 651,
-    "category": "premium",
-    "badge": "fresh meat",
-    "desc": "Seasoned and stuffed in-house with our secret spice blend.",
-    "img": "https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?auto=format&fit=crop&w=900&q=80",
+    "name": "Rindon full carcass",
+    "price": 0,
+    "category": "specialty",
+    "badge": "fresh",
+    "desc": "",
+    "img": "assets/rindon-full-carcass-1780219803415.jpg",
     "icon": "sparkles"
   },
   {
     "name": "Pork Fillet",
-    "price": 0,
+    "price": 1100,
     "category": "premium",
     "badge": "Premium",
     "desc": "The most tender cut, perfect for quick searing and stir-fry.",
-    "img": "assets/pork-fillet-1780219887126.jpg",
+    "img": "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=900&q=80",
     "icon": "crown"
   },
   {
-    "name": "Pork Shoulder",
-    "price": 600,
-    "category": "standard",
+    "name": "Pork loin boneless",
+    "price": 0,
+    "category": "premium",
     "badge": null,
     "desc": "Great for slow cooking, stews, and pulled pork.",
-    "img": "https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=900&q=80",
+    "img": "assets/pork-loin-boneless-1780219973319.jpg",
     "icon": "soup"
   },
   {
