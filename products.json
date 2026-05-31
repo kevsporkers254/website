@@ -1,20 +1,20 @@
 [
   {
-    "name": "Pork Ribs",
-    "price": 850,
+    "name": "Rindless pork chops",
+    "price": 0,
     "category": "premium",
     "badge": "Bestseller",
     "desc": "Tender, meaty ribs perfect for grilling and nyama choma.",
-    "img": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=80",
+    "img": "assets/rindless-pork-chops-1780219704876.jpg",
     "icon": "flame"
   },
   {
     "name": "Pork Belly",
-    "price": 0,
+    "price": 750,
     "category": "premium",
     "badge": "Popular",
-    "desc": "Rich, fatty cut ideal for slow roasting and crispy belly.",
-    "img": "https://images.unsplash.com/photo-1615937691194-97dbd3f3dc29?auto=format&fit=crop&w=900&q=80",
+    "desc": "Rich, fatty cut ideal for slow roasting",
+    "img": "assets/pork-belly-1780219545441.jpg",
     "icon": "chef-hat"
   },
   {
@@ -27,21 +27,21 @@
     "icon": "utensils"
   },
   {
-    "name": "Rindon full carcass",
-    "price": 0,
-    "category": "specialty",
-    "badge": "fresh",
-    "desc": "",
-    "img": "assets/rindon-full-carcass-1780219803415.jpg",
+    "name": "Pork ",
+    "price": 651,
+    "category": "premium",
+    "badge": "fresh meat",
+    "desc": "Seasoned and stuffed in-house with our secret spice blend.",
+    "img": "https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?auto=format&fit=crop&w=900&q=80",
     "icon": "sparkles"
   },
   {
     "name": "Pork Fillet",
-    "price": 1100,
+    "price": 0,
     "category": "premium",
     "badge": "Premium",
     "desc": "The most tender cut, perfect for quick searing and stir-fry.",
-    "img": "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=900&q=80",
+    "img": "assets/pork-fillet-1780219887126.jpg",
     "icon": "crown"
   },
   {
