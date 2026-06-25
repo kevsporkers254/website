@@ -37,7 +37,7 @@
   },
   {
     "name": "Pork Fillet",
-    "price": 0,
+    "price": 600,
     "category": "premium",
     "badge": "Premium",
     "desc": "The most tender cut, perfect for quick searing and stir-fry.",
@@ -46,7 +46,7 @@
   },
   {
     "name": "Pork loin boneless",
-    "price": 1499,
+    "price": 0,
     "category": "premium",
     "badge": null,
     "desc": "Great for slow cooking, stews, and pulled pork.",
