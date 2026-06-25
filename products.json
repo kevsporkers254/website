@@ -19,10 +19,10 @@
   },
   {
     "name": "Pork Chops",
-    "price": 0,
+    "price": 750,
     "category": "standard",
     "badge": null,
-    "desc": "Bone-in chops for quick pan-frying or braai.",
+    "desc": "Bone-in chops for quick pan-frying or grilling.",
     "img": "assets/pork-chops.jpg",
     "icon": "utensils"
   },
