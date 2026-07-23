@@ -5,7 +5,7 @@
     "category": "premium",
     "badge": "Bestseller",
     "desc": "Tender, meaty ribs perfect for grilling and nyama choma.",
-    "img": "assets/pork-ribs-1784818236746.jpg",
+    "img": "assets/pork-ribs-1782403662218.jpg",
     "icon": "flame"
   },
   {
@@ -14,15 +14,15 @@
     "category": "premium",
     "badge": "Popular",
     "desc": "Rich, fatty cut ideal for slow roasting and crispy belly.",
-    "img": "https://images.unsplash.com/photo-1615937691194-97dbd3f3dc29?auto=format&fit=crop&w=900&q=80",
+    "img": "assets/pork-belly-1784818420523.jpg",
     "icon": "chef-hat"
   },
   {
-    "name": "Pork Chops",
-    "price": 0,
-    "category": "standard",
+    "name": "Rindless Pork Chops B/in",
+    "price": 750,
+    "category": "premium",
     "badge": null,
-    "desc": "Bone-in chops for quick pan-frying or braai.",
+    "desc": "Bone-in chops for quick pan-frying.",
     "img": "assets/pork-chops.jpg",
     "icon": "utensils"
   },
@@ -41,7 +41,7 @@
     "category": "premium",
     "badge": "Premium",
     "desc": "The most tender cut, perfect for quick searing and stir-fry.",
-    "img": "assets/pork-fillet-1784818529465.jpg",
+    "img": "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=900&q=80",
     "icon": "crown"
   },
   {
@@ -77,16 +77,16 @@
     "category": "premium",
     "badge": "New",
     "desc": "Fresh pork hindleg cut for roasting, stews, and family meals.",
-    "img": "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=900&q=80",
+    "img": "assets/rindon-pork-hindleg-1784818702440.jpg",
     "icon": "bone"
   },
   {
-    "name": "Pork Ribs rindon",
+    "name": "Pork Rids rindon",
     "price": 0,
     "category": "premium",
     "badge": "New",
     "desc": "Fresh rindon pork ribs cut for roasting, grilling, and stew.",
-    "img": "assets/pork-ribs-rindon-1784818859033.jpg",
+    "img": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=80",
     "icon": "flame"
   }
 ]
