@@ -73,7 +73,7 @@
   },
   {
     "name": "Rindon Pork Hindleg",
-    "price": 0,
+    "price": 550,
     "category": "premium",
     "badge": "New",
     "desc": "Fresh pork hindleg cut for roasting, stews, and family meals.",
@@ -81,7 +81,7 @@
     "icon": "bone"
   },
   {
-    "name": "Pork Ribs R/on",
+    "name": "Pork Ribs rindon",
     "price": 0,
     "category": "premium",
     "badge": "New",
