@@ -14,11 +14,11 @@
     "category": "premium",
     "badge": "Popular",
     "desc": "Rich, fatty cut ideal for slow roasting and crispy belly.",
-    "img": "assets/r-less-pork-full-carcass-1784820794684.jpg",
+    "img": "assets/r-less-pork-full-carcass-1784820650256.jpg",
     "icon": "chef-hat"
   },
   {
-    "name": "Pork Chops",
+    "name": "R/less Pork Chops",
     "price": 750,
     "category": "standard",
     "badge": null,
@@ -73,7 +73,7 @@
   },
   {
     "name": "Rindon Pork Hindleg",
-    "price": 550,
+    "price": 0,
     "category": "premium",
     "badge": "New",
     "desc": "Fresh pork hindleg cut for roasting, stews, and family meals.",
@@ -81,7 +81,7 @@
     "icon": "bone"
   },
   {
-    "name": "Pork Ribs rindon",
+    "name": "Pork Ribs R/on",
     "price": 0,
     "category": "premium",
     "badge": "New",
