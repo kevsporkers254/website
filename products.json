@@ -4,7 +4,7 @@
     "price": 500,
     "category": "premium",
     "badge": "Bestseller",
-    "desc": "Tender and Meaty.",
+    "desc": "Tender and meaty.",
     "img": "assets/r-on-pork-full-carcass-1784819724817.jpg",
     "icon": "flame"
   },
@@ -14,11 +14,11 @@
     "category": "premium",
     "badge": "Popular",
     "desc": "Rich, fatty cut ideal for slow roasting and crispy belly.",
-    "img": "assets/r-less-pork-full-carcass-1784820650256.jpg",
+    "img": "assets/r-less-pork-full-carcass-1784820794684.jpg",
     "icon": "chef-hat"
   },
   {
-    "name": "R/less Pork Chops",
+    "name": "Pork Chops",
     "price": 750,
     "category": "specialty",
     "badge": null,
@@ -27,12 +27,12 @@
     "icon": "utensils"
   },
   {
-    "name": "Pork Sausages",
-    "price": 650,
+    "name": "R/on Pork belly",
+    "price": 750,
     "category": "specialty",
-    "badge": "House-made",
-    "desc": "Seasoned and stuffed in-house with our secret spice blend.",
-    "img": "https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?auto=format&fit=crop&w=900&q=80",
+    "badge": null,
+    "desc": "Perfectly cut for grilling and nyama choma.",
+    "img": "assets/r-on-pork-belly-1784821349955.jpg",
     "icon": "sparkles"
   },
   {
@@ -73,7 +73,7 @@
   },
   {
     "name": "Rindon Pork Hindleg",
-    "price": 0,
+    "price": 550,
     "category": "premium",
     "badge": "New",
     "desc": "Fresh pork hindleg cut for roasting, stews, and family meals.",
@@ -81,7 +81,7 @@
     "icon": "bone"
   },
   {
-    "name": "Pork Ribs R/on",
+    "name": "Pork Ribs rindon",
     "price": 0,
     "category": "premium",
     "badge": "New",
