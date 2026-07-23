@@ -1,11 +1,11 @@
 [
   {
-    "name": "Rindon Pork full carcass",
+    "name": "R/on PORK full carcass",
     "price": 500,
     "category": "premium",
     "badge": "Bestseller",
     "desc": "Tender, meaty ribs perfect for grilling and nyama choma.",
-    "img": "assets/rindon-pork-full-carcass-1784819578496.jpg",
+    "img": "assets/r-on-pork-full-carcass-1784819724817.jpg",
     "icon": "flame"
   },
   {
@@ -14,25 +14,25 @@
     "category": "premium",
     "badge": "Popular",
     "desc": "Rich, fatty cut ideal for slow roasting and crispy belly.",
-    "img": "assets/pork-belly-1784818420523.jpg",
+    "img": "https://images.unsplash.com/photo-1615937691194-97dbd3f3dc29?auto=format&fit=crop&w=900&q=80",
     "icon": "chef-hat"
   },
   {
-    "name": "R/less Pork Chops B/in",
+    "name": "Pork Chops",
     "price": 750,
-    "category": "premium",
+    "category": "standard",
     "badge": null,
-    "desc": "Bone-in chops for quick pan-frying.",
+    "desc": "Bone-in chops for quick pan-frying or braai.",
     "img": "assets/pork-chops.jpg",
     "icon": "utensils"
   },
   {
-    "name": "R/less Pork full carcass",
-    "price": 500,
-    "category": "standard",
-    "badge": null,
+    "name": "Pork Sausages",
+    "price": 650,
+    "category": "specialty",
+    "badge": "House-made",
     "desc": "Seasoned and stuffed in-house with our secret spice blend.",
-    "img": "assets/r-less-pork-full-carcass-1784819934928.jpg",
+    "img": "https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?auto=format&fit=crop&w=900&q=80",
     "icon": "sparkles"
   },
   {
@@ -41,7 +41,7 @@
     "category": "premium",
     "badge": "Premium",
     "desc": "The most tender cut, perfect for quick searing and stir-fry.",
-    "img": "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=900&q=80",
+    "img": "assets/pork-fillet-1784818529465.jpg",
     "icon": "crown"
   },
   {
@@ -63,7 +63,7 @@
     "icon": "flame"
   },
   {
-    "name": "",
+    "name": "Pork Liver",
     "price": 450,
     "category": "standard",
     "badge": null,
@@ -77,16 +77,16 @@
     "category": "premium",
     "badge": "New",
     "desc": "Fresh pork hindleg cut for roasting, stews, and family meals.",
-    "img": "assets/rindon-pork-hindleg-1784818702440.jpg",
+    "img": "assets/rindon-pork-hindleg-1784819329832.jpg",
     "icon": "bone"
   },
   {
-    "name": "Pork Rids rindon",
+    "name": "Pork Ribs rindon",
     "price": 0,
     "category": "premium",
     "badge": "New",
     "desc": "Fresh rindon pork ribs cut for roasting, grilling, and stew.",
-    "img": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=80",
+    "img": "assets/pork-ribs-rindon-1784818859033.jpg",
     "icon": "flame"
   }
 ]
