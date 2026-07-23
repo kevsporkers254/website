@@ -5,7 +5,7 @@
     "category": "premium",
     "badge": "Bestseller",
     "desc": "Tender, meaty ribs perfect for grilling and nyama choma.",
-    "img": "assets/pork-ribs-1782403662218.jpg",
+    "img": "assets/pork-ribs-1784818236746.jpg",
     "icon": "flame"
   },
   {
@@ -14,7 +14,7 @@
     "category": "premium",
     "badge": "Popular",
     "desc": "Rich, fatty cut ideal for slow roasting and crispy belly.",
-    "img": "assets/pork-belly-1784818420523.jpg",
+    "img": "https://images.unsplash.com/photo-1615937691194-97dbd3f3dc29?auto=format&fit=crop&w=900&q=80",
     "icon": "chef-hat"
   },
   {
@@ -41,7 +41,7 @@
     "category": "premium",
     "badge": "Premium",
     "desc": "The most tender cut, perfect for quick searing and stir-fry.",
-    "img": "https://images.unsplash.com/photo-1607623814075-e51df1bdc82f?auto=format&fit=crop&w=900&q=80",
+    "img": "assets/pork-fillet-1784818529465.jpg",
     "icon": "crown"
   },
   {
