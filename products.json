@@ -50,7 +50,7 @@
     "category": "premium",
     "badge": null,
     "desc": "Great for slow cooking, stews, and pulled pork.",
-    "img": "assets/pork-leg-r-on-1789933789023.jpg",
+    "img": "assets/pork-leg-r-on-1789933617264.jpg",
     "icon": "soup"
   },
   {
@@ -82,7 +82,7 @@
   },
   {
     "name": "R/on Pork Ribs",
-    "price": 0,
+    "price": 500,
     "category": "premium",
     "badge": "New",
     "desc": "Fresh rindon pork ribs cut for roasting, grilling, and stew.",
