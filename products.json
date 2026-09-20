@@ -45,12 +45,12 @@
     "icon": "crown"
   },
   {
-    "name": "Pork Shoulder",
-    "price": 600,
-    "category": "standard",
+    "name": "PORK LEG R/ON",
+    "price": 650,
+    "category": "premium",
     "badge": null,
     "desc": "Great for slow cooking, stews, and pulled pork.",
-    "img": "https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=900&q=80",
+    "img": "assets/pork-leg-r-on-1789933258929.jpg",
     "icon": "soup"
   },
   {
